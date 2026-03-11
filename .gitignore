@@ -1,0 +1,16 @@
+# Ignore everything in custom folders except our templates and the .gitkeep
+custom/*
+!custom/hypr/
+!custom/kitty/
+!custom/fish/
+!custom/.gitkeep
+
+# Track only specific custom files
+custom/hypr/.config/hypr/*
+!custom/hypr/.config/hypr/custom.conf
+
+custom/kitty/.config/kitty/*
+!custom/kitty/.config/kitty/custom.conf
+
+custom/fish/.config/fish/conf.d/*
+!custom/fish/.config/fish/conf.d/custom.fish

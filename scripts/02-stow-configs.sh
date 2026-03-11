@@ -33,7 +33,14 @@ for pkg in "${packages[@]}"; do
     done
 done
 
-echo "Linking configurations via GNU Stow..."
+echo "Linking core configurations via GNU Stow..."
 stow -v -R -t "$HOME" -d stow "${packages[@]}"
+
+# Linking user custom configurations if custom directory exists
+if [ -d "custom" ] && [ "$(ls -A custom | grep -v '.gitkeep')" ]; then
+    echo "Linking user custom configurations via GNU Stow..."
+    custom_packages=($(ls -d custom/*/ | xargs -n 1 basename))
+    stow -v -R -t "$HOME" -d custom "${custom_packages[@]}"
+fi
 
 echo "Stow configuration completed successfully!"
