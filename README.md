@@ -18,10 +18,20 @@ Custom configuration files managed with GNU Stow.
    ./install.sh
    ```
 
+## Customization
+
+You can add your own personal settings without modifying the core files by using the `custom/` directory:
+
+- **Hyprland**: Add settings to `custom/hypr/.config/hypr/custom.conf`
+- **Kitty**: Add settings to `custom/kitty/.config/kitty/custom.conf`
+- **Fish**: Add scripts or aliases to `custom/fish/.config/fish/conf.d/custom.fish`
+
+These files are sourced automatically and are tracked by Git as templates, but you can safely add your own local overrides.
+
 ## What the script does
 
 1. **Package Installation**: Automatically detects your AUR helper (`yay` or `paru`) and installs necessary packages (`stow`, `thunar`, `kitty`, etc.), including updating `-git` packages to their latest commits.
-2. **Dynamic Stow Linking**: Detects all configurations inside the `stow/` directory, removes existing conflicts in `~/.config/`, and creates symbolic links to your home directory.
+2. **Dynamic Stow Linking**: Detects all configurations inside the `stow/` and `custom/` directories, removes existing conflicts in `~/.config/`, and creates symbolic links to your home directory.
 
 ## Requirements
 
