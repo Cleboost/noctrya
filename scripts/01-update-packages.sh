@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ALL_PKGS=("stow" "thunar" "kitty" "noctalia-shell-git" "noctalia-qs-git" "base-devel" "git")
+# shellcheck disable=SC2054
+ALL_PKGS=("stow" "thunar" "kitty" "noctalia-shell-git" "noctalia-qs-git" "base-devel" "git", "starship")
 
 if command -v yay &> /dev/null; then
     HELPER="yay"
