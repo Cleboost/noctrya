@@ -43,4 +43,6 @@ if [ -d "custom" ] && [ "$(ls -A custom | grep -v '.gitkeep' | grep -v 'README.m
     stow -v -R --no-folding -t "$HOME" -d custom "${custom_packages[@]}"
 fi
 
+hyprctl reload
+
 echo "Stow configuration completed successfully!"
