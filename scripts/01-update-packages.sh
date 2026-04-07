@@ -44,8 +44,7 @@ echo "Installing fastfetch config in ~/.local/share..."
 sudo -u "$SUDO_USER" mkdir -p "$USER_HOME/.local/share"
 
 if [ -d "$FASTFETCH_CONFIG_DIR" ]; then
-    echo "Existing fastfetch config found in $FASTFETCH_CONFIG_DIR. Replacing it..."
-    echo "Warning: existing fastfetch directory will be deleted without backup."
+    echo "Warning: existing fastfetch config found in $FASTFETCH_CONFIG_DIR and will be replaced without backup."
     if ! sudo -u "$SUDO_USER" rm -rf "$FASTFETCH_CONFIG_DIR"; then
         echo "Error: Failed to remove existing fastfetch directory: $FASTFETCH_CONFIG_DIR."
         exit 1
