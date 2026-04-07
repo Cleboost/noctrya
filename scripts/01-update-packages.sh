@@ -28,6 +28,11 @@ else
     sudo -u "$SUDO_USER" "$HELPER" -S --needed --devel --noconfirm "${ALL_PKGS[@]}"
 fi
 
+if [ -z "$SUDO_USER" ]; then
+    echo "Error: SUDO_USER is not set. Please run this script via sudo from a regular user account."
+    exit 1
+fi
+
 USER_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
 if [ -z "$USER_HOME" ]; then
     echo "Error: Unable to determine home directory for user $SUDO_USER. Please ensure the user exists and has a valid home directory."
@@ -38,7 +43,8 @@ FASTFETCH_CONFIG_DIR="$USER_HOME/.local/share/fastfetch"
 if [ -d "$FASTFETCH_CONFIG_DIR/.git" ]; then
     echo "Fastfetch config repository already installed in $FASTFETCH_CONFIG_DIR."
 elif [ -d "$FASTFETCH_CONFIG_DIR" ]; then
-    echo "Directory $FASTFETCH_CONFIG_DIR already exists and is not a git repository. Skipping fastfetch config clone."
+    echo "Warning: $FASTFETCH_CONFIG_DIR already exists and is not a git repository."
+    echo "Please remove or rename this directory, then rerun the installer to clone fastfetch config."
 else
     echo "Installing fastfetch config in ~/.local/share..."
     sudo -u "$SUDO_USER" mkdir -p "$USER_HOME/.local/share"
