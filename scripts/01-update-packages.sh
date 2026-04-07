@@ -30,7 +30,7 @@ fi
 
 USER_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
 if [ -z "$USER_HOME" ]; then
-    echo "Unable to determine home directory for user $SUDO_USER."
+    echo "Error: Unable to determine home directory for user $SUDO_USER. Please ensure the user exists and has a valid home directory."
     exit 1
 fi
 FASTFETCH_CONFIG_DIR="$USER_HOME/.local/share/fastfetch"
@@ -42,5 +42,8 @@ elif [ -d "$FASTFETCH_CONFIG_DIR" ]; then
 else
     echo "Installing fastfetch config in ~/.local/share..."
     sudo -u "$SUDO_USER" mkdir -p "$USER_HOME/.local/share"
-    sudo -u "$SUDO_USER" git clone https://github.com/LierB/fastfetch "$FASTFETCH_CONFIG_DIR"
+    if ! sudo -u "$SUDO_USER" git clone https://github.com/LierB/fastfetch "$FASTFETCH_CONFIG_DIR"; then
+        echo "Error: Failed to clone fastfetch config into $FASTFETCH_CONFIG_DIR."
+        exit 1
+    fi
 fi
