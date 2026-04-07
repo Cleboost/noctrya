@@ -27,3 +27,15 @@ else
     echo "Attempting direct installation..."
     sudo -u "$SUDO_USER" "$HELPER" -S --needed --devel --noconfirm "${ALL_PKGS[@]}"
 fi
+
+FASTFETCH_CONFIG_DIR="/home/$SUDO_USER/.local/share/fastfetch"
+
+if [ -d "$FASTFETCH_CONFIG_DIR/.git" ]; then
+    echo "Fastfetch config repository already installed in $FASTFETCH_CONFIG_DIR."
+elif [ -d "$FASTFETCH_CONFIG_DIR" ]; then
+    echo "Directory $FASTFETCH_CONFIG_DIR already exists and is not a git repository. Skipping fastfetch config clone."
+else
+    echo "Installing fastfetch config in ~/.local/share..."
+    sudo -u "$SUDO_USER" mkdir -p "/home/$SUDO_USER/.local/share"
+    sudo -u "$SUDO_USER" git clone https://github.com/LierB/fastfetch "$FASTFETCH_CONFIG_DIR"
+fi
