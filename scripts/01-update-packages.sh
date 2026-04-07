@@ -44,7 +44,7 @@ if [ -d "$FASTFETCH_CONFIG_DIR/.git" ]; then
     echo "Fastfetch config repository already installed in $FASTFETCH_CONFIG_DIR."
 elif [ -d "$FASTFETCH_CONFIG_DIR" ]; then
     echo "Warning: $FASTFETCH_CONFIG_DIR already exists and is not a git repository."
-    echo "Run one of: rm -rf \"$FASTFETCH_CONFIG_DIR\"  OR  mv \"$FASTFETCH_CONFIG_DIR\" \"${FASTFETCH_CONFIG_DIR}.backup\""
+    echo "Run one of: rm -rf \"$FASTFETCH_CONFIG_DIR\" OR mv \"$FASTFETCH_CONFIG_DIR\" \"${FASTFETCH_CONFIG_DIR}.backup\""
     echo "Then rerun the installer to clone fastfetch config."
 else
     echo "Installing fastfetch config in ~/.local/share..."
