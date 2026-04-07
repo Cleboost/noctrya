@@ -31,7 +31,7 @@ These files are sourced automatically and are tracked by Git as templates, but y
 ## What the script does
 
 1. **Package Installation**: Automatically detects your AUR helper (`yay` or `paru`) and installs necessary packages (`stow`, `thunar`, `kitty`, etc.), including updating `-git` packages to their latest commits.
-   It also installs the fastfetch config by cloning `https://github.com/LierB/fastfetch` into `~/.local/share/fastfetch`.
+   It also installs the fastfetch config by cloning `https://github.com/LierB/fastfetch` into `~/.local/share/fastfetch` (existing directory is replaced to support reruns/update mode).
 2. **Dynamic Stow Linking**: Detects all configurations inside the `stow/` and `custom/` directories, removes existing conflicts in `~/.config/`, and creates symbolic links to your home directory.
 
 ## Requirements

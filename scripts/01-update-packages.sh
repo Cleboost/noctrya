@@ -40,19 +40,18 @@ if [ -z "$USER_HOME" ]; then
 fi
 FASTFETCH_CONFIG_DIR="$USER_HOME/.local/share/fastfetch"
 
-if [ -d "$FASTFETCH_CONFIG_DIR/.git" ]; then
-    echo "Fastfetch config repository already installed in $FASTFETCH_CONFIG_DIR."
-elif [ -d "$FASTFETCH_CONFIG_DIR" ]; then
-    echo "Warning: $FASTFETCH_CONFIG_DIR already exists and is not a git repository."
-    echo "Please run one of the following commands:"
-    echo "  rm -rf \"$FASTFETCH_CONFIG_DIR\""
-    echo "  mv \"$FASTFETCH_CONFIG_DIR\" \"${FASTFETCH_CONFIG_DIR}.backup\""
-    echo "Then rerun the installer to clone fastfetch config."
-else
-    echo "Installing fastfetch config in ~/.local/share..."
-    sudo -u "$SUDO_USER" mkdir -p "$USER_HOME/.local/share"
-    if ! sudo -u "$SUDO_USER" git clone https://github.com/LierB/fastfetch "$FASTFETCH_CONFIG_DIR"; then
-        echo "Error: Failed to clone fastfetch config into $FASTFETCH_CONFIG_DIR."
+echo "Installing fastfetch config in ~/.local/share..."
+sudo -u "$SUDO_USER" mkdir -p "$USER_HOME/.local/share"
+
+if [ -d "$FASTFETCH_CONFIG_DIR" ]; then
+    echo "Existing fastfetch config found in $FASTFETCH_CONFIG_DIR. Replacing it..."
+    if ! sudo -u "$SUDO_USER" rm -rf "$FASTFETCH_CONFIG_DIR"; then
+        echo "Error: Failed to remove existing fastfetch directory: $FASTFETCH_CONFIG_DIR."
         exit 1
     fi
+fi
+
+if ! sudo -u "$SUDO_USER" git clone https://github.com/LierB/fastfetch "$FASTFETCH_CONFIG_DIR"; then
+    echo "Error: Failed to clone fastfetch config into $FASTFETCH_CONFIG_DIR."
+    exit 1
 fi
