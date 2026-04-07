@@ -35,7 +35,7 @@ fi
 
 USER_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
 if [ -z "$USER_HOME" ]; then
-    echo "Error: Unable to determine home directory for user $SUDO_USER. Please ensure the user exists and has a valid home directory."
+    echo "Error: Unable to determine home directory for user: $SUDO_USER. Please ensure the user exists and has a valid home directory."
     exit 1
 fi
 FASTFETCH_CONFIG_DIR="$USER_HOME/.local/share/fastfetch"
@@ -44,7 +44,9 @@ if [ -d "$FASTFETCH_CONFIG_DIR/.git" ]; then
     echo "Fastfetch config repository already installed in $FASTFETCH_CONFIG_DIR."
 elif [ -d "$FASTFETCH_CONFIG_DIR" ]; then
     echo "Warning: $FASTFETCH_CONFIG_DIR already exists and is not a git repository."
-    echo "Run one of: rm -rf \"$FASTFETCH_CONFIG_DIR\" OR mv \"$FASTFETCH_CONFIG_DIR\" \"${FASTFETCH_CONFIG_DIR}.backup\""
+    echo "Please run one of the following commands:"
+    echo "  rm -rf \"$FASTFETCH_CONFIG_DIR\""
+    echo "  mv \"$FASTFETCH_CONFIG_DIR\" \"${FASTFETCH_CONFIG_DIR}.backup\""
     echo "Then rerun the installer to clone fastfetch config."
 else
     echo "Installing fastfetch config in ~/.local/share..."
