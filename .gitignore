@@ -5,3 +5,9 @@ custom/**/*
 !custom/README.md
 
 .idea
+
+
+
+
+#Ignore Noctalia Generated files
+stow/kitty/.config/kitty/current-theme.conf

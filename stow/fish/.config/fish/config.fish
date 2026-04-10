@@ -4,6 +4,7 @@ if status is-interactive
 
     # Initialise Starship (Ton prompt stylé)
     starship init fish | source
+    fastfetch --config hypr
 
     # --- ALIAS ---
     
